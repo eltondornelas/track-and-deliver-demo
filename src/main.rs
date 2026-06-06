@@ -1,14 +1,7 @@
 use axum::{Json, Router, routing::get};
-use chrono::{DateTime, Utc};
-use serde::Serialize;
+use domain::entities::order::Order;
 
-#[derive(Serialize)]
-struct Order {
-    id: String,
-    customer_id: String, // UUID
-    status: String,
-    created_at: DateTime<Utc>,
-}
+pub mod domain;
 
 #[tokio::main]
 async fn main() {
@@ -22,10 +15,5 @@ async fn main() {
 }
 
 async fn get_order() -> Json<Order> {
-    axum::Json(Order {
-        id: "1".to_string(),
-        customer_id: "123abc321".to_string(),
-        status: "CREATED".to_string(),
-        created_at: chrono::Utc::now(),
-    })
+    axum::Json(Order::new())
 }
