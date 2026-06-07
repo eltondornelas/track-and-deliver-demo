@@ -3,28 +3,28 @@ use serde::Serialize;
 use uuid::Uuid;
 
 #[derive(Serialize, Default)]
-pub struct Order {
+pub struct Shipment {
     id: Uuid,
-    customer_name: String,
-    status: OrderStatusEnum,
+    order_id: Uuid,
+    driver_id: Uuid,
+    status: ShipmentStatus,
     created_at: DateTime<Utc>,
     updated_at: DateTime<Utc>,
 }
 
 #[derive(Serialize, Default)]
-enum OrderStatusEnum {
+enum ShipmentStatus {
     #[default]
-    Created,
-    Approved,
-    Shipped,
+    Pending,
+    Assigned,
     InTransit,
     Delivered,
-    Cancelled,
+    Failed,
 }
 
-impl Order {
+impl Shipment {
     pub fn new() -> Self {
-        Order {
+        Shipment {
             created_at: chrono::Utc::now().trunc_subsecs(3),
             updated_at: chrono::Utc::now().trunc_subsecs(3),
             ..Default::default()

@@ -2,3 +2,4 @@ cargo add tokio -F full
 cargo add axum
 cargo add serde -F derive
 cargo add chrono -F serde
+cargo add uuid -F v4,derive
