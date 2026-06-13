@@ -3,3 +3,20 @@ cargo add axum
 cargo add serde -F derive
 cargo add chrono -F serde
 cargo add uuid -F v4,derive
+
+touch docker-compose.yml
+docker compose up -d
+touch .env
+
+cargo install sqlx-cli \
+  --no-default-features \
+  --features postgres
+
+sqlx --version
+sqlx migrate add create_orders_table (driver, shipment...)
+sqlx migrate run
+
+psql \
+  -h localhost \
+  -U logistics \
+  -d logistics

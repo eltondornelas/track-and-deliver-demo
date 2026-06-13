@@ -7,6 +7,7 @@ pub struct Shipment {
     id: Uuid,
     order_id: Uuid,
     driver_id: Uuid,
+    vehicle_id: Uuid,
     status: ShipmentStatus,
     created_at: DateTime<Utc>,
     updated_at: DateTime<Utc>,
