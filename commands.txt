@@ -20,3 +20,9 @@ psql \
   -h localhost \
   -U logistics \
   -d logistics
+
+cargo add sqlx \
+  --features postgres,runtime-tokio,tls-rustls,uuid,chrono,migrate,macros
+
+cargo add dotenvy
+cargo add anyhow
