@@ -1,9 +1,11 @@
 use async_trait::async_trait;
-use chrono::{DateTime, Utc};
-use sqlx::{PgPool, prelude::FromRow};
+use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::domain::{entities::order::Order, repository::order_repository::OrderRepository};
+use crate::{
+    domain::{entities::order::Order, repository::order_repository::OrderRepository},
+    infrastructure::repository::postgres::models::order_row::OrderRow,
+};
 
 pub struct PostgresOrderRepository {
     pool: PgPool,
@@ -13,15 +15,6 @@ impl PostgresOrderRepository {
     pub fn new(pool: PgPool) -> Self {
         Self { pool }
     }
-}
-
-#[derive(Debug, FromRow)]
-pub struct OrderRow {
-    pub id: Uuid,
-    pub customer_name: String,
-    pub status: String,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
 }
 
 #[async_trait]
@@ -69,7 +62,7 @@ impl OrderRepository for PostgresOrderRepository {
         .await?;
 
         match row {
-            Some(row) => Ok(Some(row.try_into()?)),
+            Some(row) => Ok(Some(Order::try_from(row)?)),
             None => Ok(None),
         }
     }

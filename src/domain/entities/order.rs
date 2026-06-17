@@ -4,8 +4,6 @@ use chrono::{DateTime, SubsecRound, Utc};
 use serde::Serialize;
 use uuid::Uuid;
 
-use crate::infrastructure::repository::postgres_order_repository::OrderRow;
-
 #[derive(Serialize, Default)]
 pub struct Order {
     pub id: Uuid,
@@ -48,33 +46,5 @@ impl fmt::Display for OrderStatusEnum {
         };
 
         write!(f, "{value}")
-    }
-}
-
-impl OrderStatusEnum {
-    pub fn from(value: &str) -> anyhow::Result<Self> {
-        match value {
-            "CREATED" => Ok(Self::Created),
-            "APPROVED" => Ok(Self::Approved),
-            "SHIPPED" => Ok(Self::Shipped),
-            "DELIVERED" => Ok(Self::Delivered),
-            "CANCELLED" => Ok(Self::Cancelled),
-
-            _ => anyhow::bail!("Invalid order status: {}", value),
-        }
-    }
-}
-
-impl TryFrom<OrderRow> for Order {
-    type Error = anyhow::Error;
-
-    fn try_from(row: OrderRow) -> Result<Self, Self::Error> {
-        Ok(Order {
-            id: row.id,
-            customer_name: row.customer_name,
-            status: OrderStatusEnum::from(row.status.as_str())?,
-            created_at: row.created_at,
-            updated_at: row.updated_at,
-        })
     }
 }
