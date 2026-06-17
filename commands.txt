@@ -26,3 +26,4 @@ cargo add sqlx \
 
 cargo add dotenvy
 cargo add anyhow
+cargo add async-trait
