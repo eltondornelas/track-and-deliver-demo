@@ -40,6 +40,7 @@ impl OrderRepository for PostgresOrderRepository {
         .bind(order.updated_at)
         .execute(&self.pool)
         .await?;
+        // TODO: what if we want to return the entity saved?
 
         Ok(())
     }

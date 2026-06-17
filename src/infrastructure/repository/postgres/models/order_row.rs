@@ -39,15 +39,3 @@ impl TryFrom<OrderRow> for Order {
         })
     }
 }
-
-impl From<&Order> for OrderRow {
-    fn from(order: &Order) -> Self {
-        Self {
-            id: order.id,
-            customer_name: order.customer_name.clone(),
-            status: order.status.to_string(),
-            created_at: order.created_at,
-            updated_at: order.updated_at,
-        }
-    }
-}

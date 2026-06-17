@@ -32,6 +32,16 @@ impl Order {
             ..Default::default()
         }
     }
+
+    pub fn create(customer_name: String) -> Self {
+        Self {
+            id: Uuid::new_v4(),
+            customer_name,
+            status: OrderStatusEnum::Created,
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+        }
+    }
 }
 
 impl fmt::Display for OrderStatusEnum {
