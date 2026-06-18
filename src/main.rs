@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use crate::{
-    application::use_cases::create_order::CreateOrderUseCase,
+    application::use_cases::order::create_order::CreateOrderUseCase,
     infrastructure::{
         database::postgres::setup_database,
         repository::postgres::order_repository::PostgresOrderRepository,

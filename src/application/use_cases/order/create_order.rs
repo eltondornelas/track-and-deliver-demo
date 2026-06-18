@@ -2,11 +2,10 @@ use std::sync::Arc;
 
 use anyhow::Result;
 
-use crate::domain::{entities::order::Order, repository::order_repository::OrderRepository};
-
-pub struct CreateOrderCommand {
-    pub customer_name: String,
-}
+use crate::{
+    application::use_cases::order::command::CreateOrderCommand,
+    domain::{entities::order::Order, repository::order_repository::OrderRepository},
+};
 
 pub struct CreateOrderUseCase {
     repository: Arc<dyn OrderRepository>,
