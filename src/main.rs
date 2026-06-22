@@ -14,6 +14,7 @@ use domain::entities::order::Order;
 pub mod application;
 pub mod domain;
 pub mod infrastructure;
+pub mod interface;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
